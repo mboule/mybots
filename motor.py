@@ -1,5 +1,5 @@
 import constants as c
-import pyrosim.pyrosim
+import pyrosim.pyrosim as pyrosim
 import pybullet as p
 import numpy as np
 
@@ -14,24 +14,21 @@ class MOTOR:
 
 
     def Prepare_To_Act(self):
-        self.amplitude = c.backAmplitude
-        self.frequency = c.backFrequency
-        self.offset = c.backPhaseOffset
+        self.amplitude = c.BackLegAmplitude
+        self.frequency = c.BackLegFrequency
+        self.offset = c.BackLegPhaseOffset
 
         for i in range(1000):
-            if self.jointName == "FrontLeg":
+            if self.jointName == "FrontLeg_Torso":
                 self.motorValues[i] = self.amplitude * np.sin(self.frequency * c.x[i] + self.offset)
-            elif self.jointName == "BackLeg":
+            elif self.jointName == "BackLeg_Torso":
                 self.motorValues[i] = self.amplitude * np.sin(0.5*self.frequency * c.x[i] + self.offset)
 
 
-    def Set_Value(self, robot, time):
+    def Set_Value(self, robot, desiredAngle):
         pyrosim.Set_Motor_For_Joint(
             bodyIndex = robot,
             jointName = self.jointName,
             controlMode = p.POSITION_CONTROL,
-            targetPosition = self.motorValues[time],
+            targetPosition = desiredAngle,
             maxForce = c.maxForce)
-
-def Save_Values(self):
-    np.save('data/motorValues.npy', self.motorValues)

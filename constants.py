@@ -15,3 +15,6 @@ maxForce = 25
 
 # Gravity
 gravity = -9.8
+
+# Refactoring stuff
+x = numpy.linspace(-numpy.pi, numpy.pi, 1000)
