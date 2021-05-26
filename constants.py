@@ -20,7 +20,7 @@ gravity = -9.8
 x = numpy.linspace(-numpy.pi, numpy.pi, 1000)
 
 # For Evolve()
-numberOfGenerations = 5
+numberOfGenerations = 10
 
 # For Parallel Hill Climber
 populationSize = 10
@@ -28,4 +28,4 @@ populationSize = 10
 # For Quadruped
 numSensorNeurons = 6
 numMotorNeurons = 8
-motorJointRange = 0.7
+motorJointRange = 0.4

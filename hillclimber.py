@@ -28,7 +28,7 @@ class HILL_CLIMBER:
         self.child.Mutate()
 
     def Select(self):
-        if self.child.fitness < self.parent.fitness:
+        if float(self.child.fitness) < float(self.parent.fitness):
             self.parent = self.child
 
     def Print(self):

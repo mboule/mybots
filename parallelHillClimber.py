@@ -1,7 +1,7 @@
-from solution import SOLUTION
+import solution
 import constants as c
-import copy
 import os
+import copy
 
 class PARALLEL_HILL_CLIMBER:
 
@@ -11,8 +11,8 @@ class PARALLEL_HILL_CLIMBER:
         os.system("rm fitness**.txt")
         self.nextAvailableID = 0
         self.parents = {}
-        for i in range(c.populationSize):
-            self.parents[i] = SOLUTION(self.nextAvailableID)
+        for i in range(0,c.populationSize):
+            self.parents[i] = solution.SOLUTION(i)
             self.nextAvailableID += 1
 
 
@@ -28,40 +28,41 @@ class PARALLEL_HILL_CLIMBER:
         self.Evaluate(self.children)
         self.Print()
         self.Select()
+       # self.Show_Best()
 
     def Spawn(self):
         self.children = {}
-        for i in self.parents:
-            self.children[i] = copy.deepcopy(self.parents[i])
-            self.children[i].Set_ID(self.nextAvailableID)
+        for key in self.parents.keys():
+            self.children[key] = copy.deepcopy(self.parents[key])
+            self.children[key].Set_ID(self.nextAvailableID)
             self.nextAvailableID += 1
 
     def Mutate(self):
-        for i in self.children:
-            self.children[i].Mutate()
+        for key in self.children.keys():
+            self.children[key].Mutate()
 
     def Select(self):
-        for i in self.parents:
-            if self.children[i].fitness > self.parents[i].fitness:
-                self.parents[i] = self.children[i]
+        for key in self.parents.keys():
+            if float(self.children[key].fitness < float(self.parents[key].fitness)):
+                self.parents[key] = copy.deepcopy(self.children[key])
 
     def Print(self):
         print("\n")
-        for i in self.parents:
-            print(str(self.parents[i].fitness) + ", " + str(self.children[i].fitness))
+        for key in self.parents.keys():
+            print("Parent: " + str(self.parents[key].fitness) + ", Child: " + str(self.children[key].fitness))
         print("\n")
 
     def Show_Best(self):
-        best = -1000
+        best = 1000
         best_key = 0
-        for key in self.parents:
-            if (self.parents[key].fitness > best):
+        for key in self.parents.keys():
+            if float(self.parents[key].fitness) < float(best):
                 best = self.parents[key].fitness
                 best_key = key
         self.parents[best_key].Start_Simulation("GUI")
 
     def Evaluate(self, solutions):
-        for parent in solutions:
-            solutions[parent].Start_Simulation("DIRECT")
-        for parent in solutions:
-            solutions[parent].Wait_For_Simulation_To_End()
+        for key in solutions.keys():
+            solutions[key].Start_Simulation("DIRECT")
+        for key in solutions.keys():
+            solutions[key].Wait_For_Simulation_To_End()
