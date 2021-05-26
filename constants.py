@@ -1,17 +1,17 @@
 import numpy
 
 # Back Leg stuff
-BackLegAmplitude = numpy.pi/8
+BackLegAmplitude = numpy.pi/4
 BackLegFrequency = 10
 BackLegPhaseOffset = 0
 
 # Front Leg stuff
-FrontLegAmplitude = numpy.pi
-FrontLegFrequency = 60
-FrontLegPhaseOffset = numpy.pi/2
+FrontLegAmplitude = numpy.pi/4
+FrontLegFrequency = 10
+FrontLegPhaseOffset = 0
 
 # Max Force of legs
-maxForce = 80
+maxForce = 85
 
 # Gravity
 gravity = -9.8
@@ -20,7 +20,7 @@ gravity = -9.8
 x = numpy.linspace(-numpy.pi, numpy.pi, 1000)
 
 # For Evolve()
-numberOfGenerations = 10
+numberOfGenerations = 5
 
 # For Parallel Hill Climber
 populationSize = 10
