@@ -10,12 +10,12 @@ import constants as c
 class ROBOT:
 
     def __init__(self, solutionID):
-        self.myID = solutionID
+        self.solutionID = solutionID
         self.robot = p.loadURDF("body.urdf")
         pyrosim.Prepare_To_Simulate("body.urdf")
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
-        self.nn = NEURAL_NETWORK("brain" + str(solutionID) + ".nndf")
+        self.nn = NEURAL_NETWORK("brain" + str(self.solutionID) + ".nndf")
         os.system("rm brain" + str(solutionID) + ".nndf")
 
     def Prepare_To_Sense(self):
@@ -45,13 +45,13 @@ class ROBOT:
         #self.nn.Print()
 
     def Get_Fitness(self):
-        basePositionAndOrientation = p.getBasePositionAndOrientation(self.robot)
-        basePosition = basePositionAndOrientation[0]
-        zPosition = basePosition[2]
-        f = open("tmp" + str(self.myID) + ".txt", "w")
-        f.write(str(zPosition))
+        stateOfLinkZero = p.getLinkState(self.robot,0)
+        positionOfLinkZero = stateOfLinkZero[0]
+        xCoordinateOfLinkZero = positionOfLinkZero[0]
+        f = open("tmp" + str(self.solutionID) + ".txt", "w")
+        f.write(str(xCoordinateOfLinkZero))
         f.close()
-        os.system("mv tmp" + str(self.myID) + ".txt fitness" + str(self.myID) + ".txt")
+        os.system("mv tmp" + str(self.solutionID) + ".txt fitness" + str(self.solutionID) + ".txt")
 
 
 

@@ -13,7 +13,15 @@ class SOLUTION:
 
     def create_world(self):
         pyrosim.Start_SDF("world.sdf")
-        pyrosim.Send_Cube(name="Box", pos=[-2, -1, .5], size=[1, 1, 1])
+        pyrosim.Send_Cube(name="Box1", pos=[-2, -2, 0.5] , size=[1,1,1])
+        pyrosim.Send_Cube(name="Box2", pos=[-2, 3, 0.5] , size=[1,1,1])
+        pyrosim.Send_Cube(name="Box3", pos=[-2, 8, 0.5] , size=[1,1,1])
+        pyrosim.Send_Cube(name="Box4", pos=[-5, -2, 0.5] , size=[1,1,1])
+        pyrosim.Send_Cube(name="Box6", pos=[-5, 3, 0.5] , size=[1,1,1])
+        pyrosim.Send_Cube(name="Box7", pos=[-5, 8, 0.5] , size=[1,1,1])
+        pyrosim.Send_Cube(name="Box8", pos=[-7, -2, 0.5] , size=[1,1,1])
+        pyrosim.Send_Cube(name="Box8", pos=[-7, 3, 0.5] , size=[1,1,1])
+        pyrosim.Send_Cube(name="Box8", pos=[-7, 8, 0.5] , size=[1,1,1])
         pyrosim.End()
 
     def Create_Body(self):
@@ -80,10 +88,10 @@ class SOLUTION:
         self.Create_Body()
         self.Create_Brain()
         os.system("python3 simulate.py " + directOrGui + " " + str(self.myID))
+        while not os.path.exists("fitness" + str(self.myID) + ".txt"):
+            time.sleep(0.001)
 
     def Wait_For_Simulation_To_End(self):
-        while not os.path.exists("fitness" + str(self.myID) + ".txt"):
-            time.sleep(0.01)
         f = open("fitness" + str(self.myID) + ".txt", "r")
         self.fitness = float(f.read())
         f.close()

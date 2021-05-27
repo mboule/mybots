@@ -1,17 +1,17 @@
 import numpy
 
-# Back Leg stuff
-BackLegAmplitude = numpy.pi/4
-BackLegFrequency = 10
-BackLegPhaseOffset = 0
+# Back Leg
+BackLegAmplitude = numpy.pi/6
+BackLegFrequency = 1/25
+BackLegPhaseOffset = numpy.pi/4
 
-# Front Leg stuff
-FrontLegAmplitude = numpy.pi/4
-FrontLegFrequency = 10
+# Front Leg
+FrontLegAmplitude = numpy.pi/3
+FrontLegFrequency = 1/25
 FrontLegPhaseOffset = 0
 
 # Max Force of legs
-maxForce = 85
+maxForce = 500
 
 # Gravity
 gravity = -9.8
@@ -23,9 +23,9 @@ x = numpy.linspace(-numpy.pi, numpy.pi, 1000)
 numberOfGenerations = 5
 
 # For Parallel Hill Climber
-populationSize = 10
+populationSize = 20
 
 # For Quadruped
 numSensorNeurons = 6
 numMotorNeurons = 8
-motorJointRange = 0.7
+motorJointRange = 0.6
